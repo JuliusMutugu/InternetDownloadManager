@@ -1,0 +1,127 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<MainLayout>:
+    orientation: 'vertical'
+    padding: 20
+    spacing: 15
+    canvas.before:
+        Color:
+            rgba: hex('#f5f5f5')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint_y: None
+        height: 60
+        orientation: 'vertical'
+        spacing: 5
+
+        Label:
+            text: 'YouTube Download Manager'
+            font_size: 24
+            bold: True
+            color: hex('#33333F')
+            size_hint_y: None
+            height: 30
+
+        Label:
+            text: 'Download videos in high quality'
+            font_size: 14
+            color: hex('#666666')
+            size_hint_y: None
+            height: 20
+
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        spacing: 10
+
+        TextInput:
+            id: url_input
+            hint_text: 'Paste YouTube URL here'
+            multiline: False
+            background_color: hex('#ffffff')
+            foreground_color: hex('#333333')
+            padding: [10, 10]
+            font_size: 16
+
+        Spinner:
+            id: format_spinner
+            text: 'MP4'
+            values: ['MP4', 'MKV', 'WebM', 'FLV']
+            size_hint_x: None
+            width: 100
+            background_color: hex('#333333')
+            color: hex('#333333')
+
+    Button:
+        id: download_btn
+        text: root.btn_text
+        disabled: root.btn_disabled
+        background_color: root.btn_color
+        background_normal: ''
+        size_hint_y: None
+        height: 50
+        font_size: 18
+        bold: True
+        on_press: root.start_download()
+
+    ProgressBar:
+        id: progress_bar
+        value: root.progress_value
+        max: 100
+        size_hint_y: None
+        height: 20
+        background_color: hex('#e0e0e0')
+        color: hex('#4285f4')
+
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        orientation: 'vertical'
+        spacing: 5
+
+        Label:
+            text: root.progress_text
+            font_size: 14
+            color: hex('#4285f4')
+            halign: 'left'
+            text_size: self.width, None
+
+        BoxLayout:
+            size_hint_y: None
+            height: 20
+            spacing: 20
+
+            Label:
+                text: root.speed_text
+                font_size: 12
+                color: hex('#666666')
+                halign: 'left'
+                text_size: self.width, None
+
+            Label:
+                text: root.time_text
+                font_size: 12
+                color: hex('#666666')
+                halign: 'left'
+                text_size: self.width, None
+
+    Label:
+        id: status_label
+        text: root.status_text
+        font_size: 14
+        color: hex('#333333')
+        size_hint_y: None
+        height: 30
+        halign: 'center'
+        text_size: self.width, None
+
+    Label:
+        text: 'Videos are saved to ~/YoutubeDownloads'
+        font_size: 12
+        color: hex('#999999')
+        size_hint_y: None
+        height: 20
+        italic: True
